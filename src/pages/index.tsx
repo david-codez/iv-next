@@ -1,14 +1,19 @@
-import Head from "next/head"
-import Image from "next/image"
-import { Inter } from "next/font/google"
-import LoginForm from "@/components/Login/LoginForm"
-import NavBar from "../components/Layout/NavBar"
-import { Container, Row } from "reactstrap"
-import styles from "@/styles/Home.module.scss"
+import Head from 'next/head'
+import Image from 'next/image'
+import { Inter } from 'next/font/google'
+import LoginForm from '@/components/Login/LoginForm'
+import NavBar from '../components/Layout/NavBar'
+import { Container, Row } from 'reactstrap'
+import styles from '@/styles/Home.module.scss'
+import { NextRequest } from 'next/server'
+import { getAllGymMembers } from '../../prisma/gymmember'
+import { GymMember } from '@/lib/GymMember'
+import { AppProps } from 'next/app'
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home(props: AppProps) {
+  console.log(props)
   return (
     <>
       <Head>
@@ -18,11 +23,11 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        <Row className='mb-3'>
+      <main className='main'>
+        <Row className='mb-5'>
           <NavBar />
         </Row>
-        <Row>
+        <Row className='mt-5'>
           <Container className={styles.appContainer}>
             <LoginForm />
           </Container>
@@ -30,4 +35,20 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async (req: NextRequest) => {
+  const gymMembers = await getAllGymMembers()
+  console.log(gymMembers)
+  console.log(gymMembers[12])
+  // Convert the updatedAt and createdAt in each user to string
+  // Otherwise, Next.js will throw an error
+  // Not required if you are not using the date fields
+  const users = gymMembers.map((member) => ({
+    ...member,
+    updatedAt: member?.updatedAt?.toISOString(),
+    createdAt: member?.createdAt?.toISOString(),
+  }))
+
+  return { props: { users } }
 }
