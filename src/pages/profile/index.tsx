@@ -37,13 +37,14 @@ export default function Profile() {
           <Row>
             <Form onSubmit={onSubmit}>
               <FormGroup>
-                <EmailField id='email' className='email' value />
+                <EmailField id='email' className='email' value={user.email || ''} />
               </FormGroup>
               <FormGroup>
                 <TextField
                   id='username'
                   className='username'
                   label='Username'
+                  value={user.nickname || ''}
                 />
               </FormGroup>
               <FormGroup>

@@ -44,7 +44,7 @@ export const getServerSideProps = async (req: NextRequest) => {
   // Convert the updatedAt and createdAt in each user to string
   // Otherwise, Next.js will throw an error
   // Not required if you are not using the date fields
-  const users = gymMembers.map((member) => ({
+  const users = gymMembers.map((member:GymMember) => ({
     ...member,
     updatedAt: member?.updatedAt?.toISOString(),
     createdAt: member?.createdAt?.toISOString(),

@@ -13,18 +13,28 @@ model chat_messages {
   @@map("chat-messages")
 }
 
+model conversations {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model gymMembers {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
 model gymmembers {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  v         Int?      @map("__v")
-  admin     Boolean
-  createdAt DateTime? @db.Date
-  email     String    @unique(map: "email_1")
-  firstName String
-  lastName  String
-  password  String?
-  updatedAt DateTime? @db.Date
-  userName  String?
-  username  String?
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  v          Int      @map("__v")
+  admin      Boolean?
+  authId     String?
+  createdAt  DateTime @db.Date
+  email      String   @unique(map: "email_1")
+  firstName  String?
+  ivUsername String?
+  lastName   String?
+  password   String?
+  updatedAt  DateTime? @db.Date
+  userName   String?
+  username   String?
 }
 
 model messages {

@@ -16,25 +16,29 @@ export const getGymMember = async (id: string) => {
   return gymmember
 }
 
-// // CREATE
-// export const createGymMember = async (
-//   email: string,
-//   firstName: string,
-//   lastName: string,
-//   username: string,
-//   admin: boolean
-// ) => {
-//   const gymmember = await prisma.gymmembers.create({
-//     data: {
-//       email,
-//       firstName,
-//       lastName,
-//       username,
-//       admin,
-//     },
-//   })
-//   return gymmember
-// }
+// CREATE
+export const createGymMember = async (
+  email: string,
+  firstName: string,
+  lastName: string,
+  username: string,
+  admin: boolean,
+  ivUsername: string,
+  authId: string
+
+) => {
+  const gymmember = await prisma.gymmembers.create({
+    data: {
+      email,
+      username,
+      admin,
+      ivUsername,
+      authId,
+      
+    },
+  })
+  return gymmember
+}
 
 // // UPDATE
 // export const updateGymMember = async (id: string, updateData: any) => {
