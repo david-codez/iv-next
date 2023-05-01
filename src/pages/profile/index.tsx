@@ -7,6 +7,7 @@ import TextField from '@/components/Forms/TextField'
 import EmailField from '@/components/Forms/EmailField'
 import SubmitButton from '@/components/Forms/SubmitButton'
 import { useForm } from 'react-hook-form'
+import { GoogleUser } from '@/lib/GoogleUser'
 
 export default function Profile() {
   const { user, error, isLoading } = useUser()
@@ -16,7 +17,6 @@ export default function Profile() {
     watch,
     formState: { errors },
   } = useForm()
-
   const defaultState = {
     email: '',
     username: '',
@@ -24,10 +24,15 @@ export default function Profile() {
   const [formValues, setFormValues] = useState(defaultState)
 
   console.log(user)
+  console.log(user?.given_name)
+
+
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>{error.message}</div>
 
   const onSubmit = (data: any) => console.log(data)
+
+  
 
   return (
     user && (
@@ -37,14 +42,35 @@ export default function Profile() {
           <Row>
             <Form onSubmit={onSubmit}>
               <FormGroup>
-                <EmailField id='email' className='email' value={user.email || ''} />
+                <EmailField 
+                  id='email' 
+                  className='email' 
+                  value={user.email || ''} 
+                  disabled
+                />
               </FormGroup>
               <FormGroup>
                 <TextField
                   id='username'
                   className='username'
                   label='Username'
-                  value={user.nickname || ''}
+                  defaultValue={user.nickname || ''}
+                />
+              </FormGroup>
+              <FormGroup>
+                <TextField 
+                  id='firstName' 
+                  className='firstName' 
+                  label='First Name' 
+                  defaultValue={user.given_name || ''} 
+                />
+              </FormGroup>
+              <FormGroup>
+                <TextField 
+                  id='lastName' 
+                  className='lastName' 
+                  label='Last Name' 
+                  defaultValue={user.family_name || ''} 
                 />
               </FormGroup>
               <FormGroup>

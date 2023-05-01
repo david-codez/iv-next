@@ -24,15 +24,15 @@ model gymMembers {
 model gymmembers {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   v          Int      @map("__v")
-  admin      Boolean?
+  admin      Boolean
   authId     String?
   createdAt  DateTime @db.Date
   email      String   @unique(map: "email_1")
-  firstName  String?
+  firstName  String
   ivUsername String?
-  lastName   String?
-  password   String?
-  updatedAt  DateTime? @db.Date
+  lastName   String
+  password   String
+  updatedAt  DateTime @db.Date
   userName   String?
   username   String?
 }

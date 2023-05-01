@@ -34,7 +34,11 @@ export const createGymMember = async (
       admin,
       ivUsername,
       authId,
-      
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      firstName,
+      lastName,
+      v: 0 
     },
   })
   return gymmember

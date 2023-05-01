@@ -6,14 +6,14 @@ type Props = {
   label?: string
   className: string,
   value?: string 
-
+  disabled?: boolean
 }
 
-export default function EmailField({ id, label = 'Email', className, value}: Props) {
+export default function EmailField({ id, label = 'Email', className, value, disabled=false}: Props) {
   return (
     <InputGroup>
       <Label for={id}>{label}</Label>
-      <Input type='email' className={className} value={value} id={id} />
+      <Input type='email' className={className} value={value} id={id} disabled={disabled} />
     </InputGroup>
   )
 }

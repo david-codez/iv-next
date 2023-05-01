@@ -1,16 +1,16 @@
 import { Conversation } from './Message'
 
 export type GymMember = {
-  v: number
-  firstName: string
-  lastName: string
+  v?: number
+  firstName?: string
+  lastName?: string
   username?: string
   ivUsername?: string
-  admin: boolean
+  admin?: boolean
   id: string
   email: string
   updatedAt: Date
   createdAt: Date
-  password: string
-  conversations: [Conversation]
+  password?: string
+  conversations?: [Conversation]
 }
